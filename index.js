@@ -1,21 +1,17 @@
-// server.js
-const dotenv = require('dotenv');
-const express = require('express');
-const bodyParser = require('body-parser');
-const axios = require('axios');
-const cloudinary = require('cloudinary').v2;
-const cors = require('cors');
-const path = require('path');
+import 'dotenv/config';
 
-const fs = require('fs');
-const ytdl = require('ytdl-core');
-const mongoose = require('mongoose');
-const Audio = require('./Audio');
+import express from 'express';
+import bodyParser from 'body-parser';
+import { v2 as cloudinary } from 'cloudinary';
+import cors from 'cors';
+import path from 'path';
+import fs from 'fs';
+import ytdl from 'ytdl-core';
+import mongoose from 'mongoose';
+import Audio from './Audio.js';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-dotenv.config();
+const PORT = process.env.PORT || 8000;
 
 app.use(bodyParser.json());
 app.use(cors());

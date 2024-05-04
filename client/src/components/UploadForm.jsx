@@ -17,6 +17,9 @@ const UploadForm = () => {
     onSuccess: () => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ['audioList'] });
+
+      setTitle('');
+      setVideoLink('');
     },
   });
 
@@ -24,9 +27,6 @@ const UploadForm = () => {
     e.preventDefault();
 
     mutation.mutate({ title, videoUrl: videoLink });
-
-    setTitle('');
-    setVideoLink('');
   };
 
   return (
@@ -50,7 +50,11 @@ const UploadForm = () => {
           />
         </div>
 
-        {mutation.isError ? <div>{mutation.error.toString()}</div> : null}
+        {mutation.isError ? (
+          <div>
+            {mutation.error.response.data.error || mutation.error.toString()}
+          </div>
+        ) : null}
 
         <button type="submit" disabled={mutation.isPending}>
           {mutation.isPending ? 'Uploading...' : 'Upload'}
