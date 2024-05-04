@@ -20,16 +20,14 @@ app.use(bodyParser.json());
 app.use(cors());
 
 cloudinary.config({
-  cloud_name: 'dzwub5bux',
-  api_key: '583413474519935',
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
 
-  api_secret: 'mDr1nh4rd527MjLVxkILQksTcgs',
+  api_secret: process.env.API_SECRET,
 });
 
 mongoose
-  .connect(
-    'mongodb+srv://light:light@cluster0.drlit.mongodb.net/02-may-audio-app?retryWrites=true&w=majority'
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log(err));
 
